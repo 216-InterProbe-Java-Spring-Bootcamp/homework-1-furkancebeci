@@ -27,12 +27,12 @@ public class ProductController {
         return productDao.findAll();
     }
 
-    @GetMapping("/findallbyexpirationdatelessthan")
+    @GetMapping("/expired")
     public List<Product> findAllByExpirationDateLessThan(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
         return productDao.findAllByExpirationDateLessThan(date);
     }
 
-    @GetMapping("/findallbyexpirationdateafter")
+    @GetMapping("/notexpired")
     public List<Product> findAllByExpirationDateAfter(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
         return productDao.findAllByExpirationDateAfterOrExpirationDateIsNull(date);
     }

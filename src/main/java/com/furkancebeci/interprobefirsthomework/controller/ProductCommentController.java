@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/productcomment")
+@RequestMapping("/productcomments")
 public class ProductCommentController {
 
     private final ProductCommentDao productCommentDao;
@@ -20,17 +20,17 @@ public class ProductCommentController {
         return productCommentDao.save(productComment);
     }
 
-    @GetMapping("/findall")
+    @GetMapping("/comments")
     public List<ProductComment> findAll(){
         return productCommentDao.findAll();
     }
 
-    @GetMapping("/findallbyproductid")
+    @GetMapping("/product/{id}")
     public List<ProductComment> findAllCommentsForProduct(@RequestParam Long productId){
         return productCommentDao.findAllByProduct_Id(productId);
     }
 
-    @GetMapping("/findallcommentbetweendate")
+    @GetMapping("/date")
     public List<ProductComment> findAllCommentsForProduct(
             @RequestParam Long productId,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")Date firstDate,
@@ -38,12 +38,12 @@ public class ProductCommentController {
         return productCommentDao.findAllByProduct_IdAndCommentDateBetween(productId, firstDate, secondDate);
     }
 
-    @GetMapping("/findallcommentsbyuser")
+    @GetMapping("/users/{id}")
     public List<ProductComment> findAllCommentsByUser(@RequestParam Long userId){
         return productCommentDao.findAllByUsers_Id(userId);
     }
 
-    @GetMapping("/findallcommentsbyuserwithdate")
+    @GetMapping("/users/date/{id}")
     public List<ProductComment> findAllCommentsByUserWithDate(
             @RequestParam Long userId,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")Date firstDate,
